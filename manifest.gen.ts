@@ -86,8 +86,10 @@ const manifest = {
     "deco-sites/controlbaker/sections/Layout/GridItem.tsx": $$$$$$12,
     "deco-sites/controlbaker/sections/Links/LinkTree.tsx": $$$$$$41,
     "deco-sites/controlbaker/sections/Links/Shortcuts.tsx": $$$$$$42,
-    "deco-sites/controlbaker/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$35,
-    "deco-sites/controlbaker/sections/Miscellaneous/CookieConsent.tsx": $$$$$$36,
+    "deco-sites/controlbaker/sections/Miscellaneous/CampaignTimer.tsx":
+      $$$$$$35,
+    "deco-sites/controlbaker/sections/Miscellaneous/CookieConsent.tsx":
+      $$$$$$36,
     "deco-sites/controlbaker/sections/Miscellaneous/Slide.tsx": $$$$$$37,
     "deco-sites/controlbaker/sections/Newsletter/Newsletter.tsx": $$$$$$43,
     "deco-sites/controlbaker/sections/Product/ImageGalleryFrontBack.tsx":

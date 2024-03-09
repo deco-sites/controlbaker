@@ -6,9 +6,7 @@ import type { ComponentChildren } from "preact";
 export interface Props {
   header: Header;
   links: Links;
-  social?: Social[];
   background: Background;
-  footer?: Footer;
 }
 
 export interface Header {
@@ -67,21 +65,6 @@ export interface Neutral {
   color: string;
 }
 
-export interface Social {
-  href: string;
-  label:
-    | "Instagram"
-    | "Facebook"
-    | "Linkedin"
-    | "WhatsApp"
-    | "Discord"
-    | "Tiktok";
-  /** @format color */
-  iconColor?: string;
-  /** @description width of the SVG line */
-  strokeWidth?: number;
-}
-
 export interface Background {
   /** @description an image will override any background color */
   image?: ImageWidget;
@@ -89,18 +72,9 @@ export interface Background {
   backgroundColor?: string;
 }
 
-export interface Footer {
-  url?: string;
-  image?: ImageWidget;
-  /** @description alternative text */
-  alt?: string;
-  width?: number;
-  height?: number;
-  text?: string;
-}
 
 function Links(props: Props) {
-  const { header, background, links, social } = props;
+  const { header, background, links } = props;
   const logo = (
     <Image
       decoding="async"
@@ -110,7 +84,9 @@ function Links(props: Props) {
       height={header.logo?.height || 60}
     />
   );
-
+  const linkStyle = {
+    padding: "28px 20px"
+  }
   const maybeLink = header?.logo?.link
     ? <a href={header?.logo?.link!} target="_blank">{logo}</a>
     : logo;
@@ -135,7 +111,7 @@ function Links(props: Props) {
 
         {header?.title && (
           <h1
-            class="text-5xl font-bold text-center"
+            class="text-4xl font-bold text-center"
             style={{ color: header.textColor }}
           >
             {header?.title}
@@ -144,7 +120,8 @@ function Links(props: Props) {
 
         {header?.description && (
           <p
-            style={{ color: header.textColor }}
+            class="text-2xl text-center"
+            style={{ color: header.textColor}}
           >
             {header?.description}
           </p>
@@ -159,7 +136,7 @@ function Links(props: Props) {
                 target="_blank"
                 href={link.href}
                 class="group h-[52px] px-6 rounded-full flex justify-start items-center font-bold gap-4"
-                style={ColorsNeutralAndHover}
+                style={{ ...linkStyle, ...ColorsNeutralAndHover }}
               >
                 {Boolean(link.icon) && (
                   <Icon
@@ -169,70 +146,16 @@ function Links(props: Props) {
                   />
                 )}
 
-                <span class="w-full text-center text-sm">
+                <span class="w-full text-center text-base">
                   {link.label}
                 </span>
 
-                <Icon
-                  size={20}
-                  id="share"
-                  strokeWidth={2}
-                  class="opacity-0 group-hover:opacity-100"
-                />
               </a>
             </li>
           ))}
         </ul>
       </main>
 
-      <footer class="flex flex-1 flex-col">
-        <ul class="flex flex-row gap-4 mb-10 justify-center items-center">
-          {social?.map((link) => (
-            <li>
-              <a
-                target="_blank"
-                href={link.href}
-                title={link.label}
-                class="text-white block rounded"
-              >
-                <Icon
-                  size={20}
-                  id={link.label}
-                  strokeWidth={link.strokeWidth || 2}
-                  fill={link.iconColor}
-                  style={{ color: link.iconColor }}
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {props.footer && (props.footer.image || props.footer.text) && (
-          <div class="mt-auto">
-            <a
-              href={props.footer.url}
-              class="text-xs flex flex-row items-center justify-center gap-1"
-              target="_blank"
-            >
-              {props.footer.text && (
-                <p
-                  style={{ color: header.textColor }}
-                >
-                  {props.footer.text}
-                </p>
-              )}
-              {props.footer.image && (
-                <Image
-                  src={props.footer.image || ""}
-                  alt={props.footer.alt}
-                  width={props.footer.width || 50}
-                  height={props.footer.height || 20}
-                />
-              )}
-            </a>
-          </div>
-        )}
-      </footer>
     </BaseContainer>
   );
 }
